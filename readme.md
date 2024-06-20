@@ -72,11 +72,7 @@ python main_terminal.py
 ```
 Here is a demo which show how this application works in the terminal,
 
-
-<video width="800" height="360" controls>
-  <source src="Demo/LLM_AGENT_TERMINAL.mp4" type="video/mp4">
-  Your browser does not support the video tag.
-</video>
+![Demo Terminal](Demo/LLM_AGENT_TERMINAL.gif)
 
 ## Inference UI
 If you use the UI (FastAPI Application) to run this application, you'll only see the final output from the model. You will be able to see the logs in the terminal but not in the UI.
@@ -89,9 +85,5 @@ After the application has loaded go to http://127.0.0.1:8000/
 
 Here is a demo which show how this application works in FastAPI,
 
-
-<video width="800" height="360" controls>
-  <source src="Demo/LLM_AGENT_UI.mp4" type="video/mp4">
-  Your browser does not support the video tag.
-</video>
+![Demo UI](Demo/LLM_AGENT_UI.gif)
 
