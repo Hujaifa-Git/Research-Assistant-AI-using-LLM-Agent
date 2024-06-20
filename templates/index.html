@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LLM Researcg Assistant</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            width: 100%;
+            max-width: 1000px;
+            margin: 20px auto;
+            background-color: #ffffff;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .top-container, .input-container, .output-container {
+            margin-bottom: 20px;
+        }
+        .top-container label {
+            display: block;
+            margin-bottom: 10px;
+        }
+        .input-container {
+            display: flex;
+        }
+        .input-container input[type="text"] {
+            flex: 1;
+            padding: 10px;
+            font-size: 16px;
+            margin-right: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        .input-container button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .input-container button:hover {
+            background-color: #0056b3;
+        }
+        .output-container {
+            padding: 10px;
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        .refresh-button {
+            display: block;
+            margin-top: 10px;
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #6c757d;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .refresh-button:hover {
+            background-color: #5a6268;
+        }
+    </style>
+    <script>
+        function resetForm() {
+            document.getElementById('chat-form').reset();
+            document.getElementById('response').innerHTML = '';
+            const radioButtons = document.querySelectorAll('input[name="option"]');
+            radioButtons.forEach(radio => radio.checked = false);
+            document.querySelector('input[name="query"]').value = '';
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>LLM Research Assistant</h1>
+            <p>This is a LLM Research assistant made using LLM Agent. Select which tool you want to use below and insert your query.</p>
+        </div>
+        <form id="chat-form" action="/" method="post">
+            <div class="top-container">
+                <label><input type="radio" name="option" value="Search" {% if selected_option == 'Search' %}checked{% endif %}>Search. [Use If you think the answer to your question can be found on the Internet]</label>
+                <label><input type="radio" name="option" value="wikipedia" {% if selected_option == 'wikipedia' %}checked{% endif %}>Wikipedia. [Use If you think the answer to your question can be found on the Wikipedia]</label>
+                <label><input type="radio" name="option" value="pub_med" {% if selected_option == 'pub_med' %}checked{% endif %}>PubMed. [Use If your question is related to medical field and you think the answer to your question can be found on the PubMed]</label>
+                <label><input type="radio" name="option" value="arxiv" {% if selected_option == 'arxiv' %}checked{% endif %}>ArXiv. [Use If you want to know about any paper uploded in ArXiv]</label>
+                <label><input type="radio" name="option" value="Let the model decide." {% if selected_option == 'Let the model decide.' %}checked{% endif %}>Let the model decide. [RECCOMENDED. If you are unsure about the above option and want the model to decide which tool to use]</label>
+            </div>
+            <div class="input-container">
+                <input type="text" name="query" placeholder="Enter your query..." value="{{ query }}">
+                <button type="submit">Send</button>
+            </div>
+        </form>
+        <div class="output-container">
+            <p id="response">{{ response }}</p>
+        </div>
+        <button class="refresh-button" onclick="resetForm();">Refresh</button>
+    </div>
+</body>
+</html>
